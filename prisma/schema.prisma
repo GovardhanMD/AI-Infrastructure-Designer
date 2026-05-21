@@ -1,0 +1,33 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Design {
+  id             String       @id @default(uuid())
+  prompt         String
+  cloudProvider  String
+  scale          String
+  region         String
+  pattern        String
+  analysis       String
+  architecture   String       // JSON string of {nodes, edges}
+  costs          String       // JSON string of {monthly, compute, storage, network, managed, breakdown}
+  terraformCode  String
+  createdAt      DateTime     @default(now())
+  deployments    Deployment[]
+}
+
+model Deployment {
+  id          String   @id @default(uuid())
+  designId    String
+  design      Design   @relation(fields: [designId], references: [id], onDelete: Cascade)
+  environment String   // "prod", "stage", "dev"
+  status      String   // "idle", "running", "success", "failed"
+  logs        String   // JSON string list of strings
+  createdAt   DateTime @default(now())
+}

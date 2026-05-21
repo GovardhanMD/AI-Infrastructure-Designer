@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #030303;
+    --foreground: #f5f5f7;
+    --bg-primary: #070708;
+    --bg-secondary: #0e0e11;
+    --bg-tertiary: #16161c;
+    
+    --glass-bg: rgba(255, 255, 255, 0.02);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-blur: blur(20px);
+    
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 24px;
+    
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #71717a;
+    
+    --accent-blue: #0a84ff;
+    --accent-purple: #bf5af2;
+    --accent-green: #30d158;
+    --accent-red: #ff453a;
+    
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  }
+  
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(to right, #ffffff, #a1a1aa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    box-shadow: var(--shadow-glass);
+  }
+  
+  .glass-button {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .glass-button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+  }
+  
+  .glass-button:active {
+    transform: translateY(0);
+  }
+
+  /* Lenis smooth scrolling */
+  html.lenis {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* React Flow Dark Theme Styling Overrides */
+.react-flow__pane {
+  background: transparent !important;
+}
+
+.react-flow__node {
+  border-radius: var(--radius-md) !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.react-flow__controls button {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  fill: #e2e8f0 !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+}
+
+.react-flow__controls button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.react-flow__controls button svg {
+  max-width: 14px !important;
+  max-height: 14px !important;
+}
+
+/* Custom animations for background glows */
+@keyframes aurora-pulse-slow {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.25;
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+    opacity: 0.35;
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+    opacity: 0.2;
+  }
+}
+
+@keyframes aurora-pulse-delayed {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1.05);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(-40px, 40px) scale(0.9);
+    opacity: 0.3;
+  }
+}
+
+.aurora-glow-1 {
+  animation: aurora-pulse-slow 15s infinite ease-in-out;
+}
+
+.aurora-glow-2 {
+  animation: aurora-pulse-delayed 18s infinite ease-in-out;
+}
+
+/* Custom scrollbars inside terminal panels */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
